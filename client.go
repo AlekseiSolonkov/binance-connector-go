@@ -7,15 +7,14 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"github.com/AlekseiSolonkov/binance-connector-go/handlers"
+	"github.com/bitly/go-simplejson"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"time"
-
-	"github.com/binance/binance-connector-go/handlers"
-	"github.com/bitly/go-simplejson"
 )
 
 // TimeInForceType define time in force type of order
