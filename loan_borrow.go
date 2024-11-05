@@ -78,7 +78,7 @@ const (
 type FlexibleLoanBorrowService struct {
 	c                *Client
 	loanCoin         *string
-	loanAmount       *float64 // Mandatory when collateralAmount is empty
+	loanAmount       *int // Mandatory when collateralAmount is empty
 	collateralCoin   *string
 	collateralAmount *float64 // Mandatory when loanAmount is empty
 }
@@ -88,7 +88,7 @@ func (s *FlexibleLoanBorrowService) LoanCoin(loanCoin string) *FlexibleLoanBorro
 	return s
 }
 
-func (s *FlexibleLoanBorrowService) LoanAmount(loanAmount float64) *FlexibleLoanBorrowService {
+func (s *FlexibleLoanBorrowService) LoanAmount(loanAmount int) *FlexibleLoanBorrowService {
 	s.loanAmount = &loanAmount
 	return s
 }
