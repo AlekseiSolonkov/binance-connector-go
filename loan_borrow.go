@@ -49,14 +49,12 @@ func (s *GetFlexibleLoanOngoingOrders) Do(ctx context.Context, opts ...RequestOp
 		endpoint: getFlexibleLoanOngoingOrdersEndpoint,
 		secType:  secTypeSigned,
 	}
-	m := params{}
 	if s.loanCoin != nil {
-		m["loanCoin"] = *s.loanCoin
+		r.setParam("loanCoin", *s.loanCoin)
 	}
 	if s.collateralCoin != nil {
-		m["collateralCoin"] = *s.collateralCoin
+		r.setParam("collateralCoin", *s.collateralCoin)
 	}
-	r.setParams(m)
 	data, err := s.c.callAPI(ctx, r, opts...)
 	if err != nil {
 		return nil, err
@@ -120,20 +118,18 @@ func (s *FlexibleLoanBorrowService) Do(ctx context.Context, opts ...RequestOptio
 		endpoint: flexibleLoanBorrowEndpoint,
 		secType:  secTypeSigned,
 	}
-	m := params{}
 	if s.loanCoin != nil {
-		m["loanCoin"] = *s.loanCoin
+		r.setParam("loanCoin", *s.loanCoin)
 	}
 	if s.loanAmount != nil {
-		m["loanAmount"] = *s.loanAmount
+		r.setParam("loanAmount", *s.loanAmount)
 	}
 	if s.collateralCoin != nil {
-		m["collateralCoin"] = *s.collateralCoin
+		r.setParam("collateralCoin", *s.collateralCoin)
 	}
 	if s.collateralAmount != nil {
-		m["collateralAmount"] = *s.collateralAmount
+		r.setParam("collateralAmount", *s.collateralAmount)
 	}
-	r.setParams(m)
 	data, err := s.c.callAPI(ctx, r, opts...)
 	if err != nil {
 		return nil, err

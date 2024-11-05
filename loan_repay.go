@@ -64,26 +64,23 @@ func (s *FlexibleLoanRepayService) Do(ctx context.Context, opts ...RequestOption
 		endpoint: flexibleLoanRepayEndpoint,
 		secType:  secTypeSigned,
 	}
-	m := params{
-		"fullRepayment":    false,
-		"collateralReturn": true,
-	}
+
 	if s.loanCoin != nil {
-		m["loanCoin"] = *s.loanCoin
+		r.setParam("loanCoin", *s.loanCoin)
 	}
 	if s.collateralCoin != nil {
-		m["collateralCoin"] = *s.collateralCoin
+		r.setParam("collateralCoin", *s.collateralCoin)
 	}
 	if s.repayAmount != nil {
-		m["repayAmount"] = *s.repayAmount
+		r.setParam("repayAmount", *s.repayAmount)
 	}
 	if s.collateralReturn != nil {
-		m["collateralReturn"] = *s.collateralReturn
+		r.setParam("collateralReturn", *s.collateralReturn)
 	}
 	if s.fullRepayment != nil {
-		m["fullRepayment"] = *s.fullRepayment
+		r.setParam("fullRepayment", *s.fullRepayment)
 	}
-	r.setParams(m)
+
 	data, err := s.c.callAPI(ctx, r, opts...)
 	if err != nil {
 		return nil, err
