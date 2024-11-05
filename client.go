@@ -772,8 +772,8 @@ func (c *Client) NewGetFiatDepositWithdrawHistoryService() *GetFiatDepositWithdr
 }
 
 // Loans:
-func (c *Client) NewGetFiatPaymentHistoryService() *GetFiatPaymentHistoryService {
-	return &GetFiatPaymentHistoryService{c: c}
+func (c *Client) NewGetFlexibleLoanOngoingOrders() *GetFlexibleLoanOngoingOrders {
+	return &GetFlexibleLoanOngoingOrders{c: c}
 }
 
 func (c *Client) NewFlexibleLoanBorrowService() *FlexibleLoanBorrowService {
