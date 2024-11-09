@@ -127,11 +127,6 @@ func (s *FlexibleLoanBorrowService) Do(ctx context.Context, opts ...RequestOptio
 	if s.collateralCoin != nil {
 		r.setParam("collateralCoin", *s.collateralCoin)
 	}
-	if s.collateralAmount != nil {
-		r.setParam("collateralAmount", *s.collateralAmount)
-	}
-
-	r.setParam("recvWindow", 5000)
 
 	data, err := s.c.callAPI(ctx, r, opts...)
 	if err != nil {

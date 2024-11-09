@@ -783,3 +783,7 @@ func (c *Client) NewFlexibleLoanBorrowService() *FlexibleLoanBorrowService {
 func (c *Client) NewFlexibleLoanRepayService() *FlexibleLoanRepayService {
 	return &FlexibleLoanRepayService{c: c}
 }
+
+func (c *Client) NewSimpleEarnFlexibleRedeem() *SimpleEarnFlexibleRedeem {
+	return &SimpleEarnFlexibleRedeem{c: c}
+}

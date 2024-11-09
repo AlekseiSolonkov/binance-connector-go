@@ -74,9 +74,6 @@ func (s *FlexibleLoanRepayService) Do(ctx context.Context, opts ...RequestOption
 	if s.repayAmount != nil {
 		r.setParam("repayAmount", *s.repayAmount)
 	}
-	if s.collateralReturn != nil {
-		r.setParam("collateralReturn", *s.collateralReturn)
-	}
 	if s.fullRepayment != nil {
 		r.setParam("fullRepayment", *s.fullRepayment)
 	}
