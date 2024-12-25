@@ -3,6 +3,8 @@ package binance_connector
 import (
 	"context"
 	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 )
@@ -1397,6 +1399,8 @@ func (s *UniversalTransferService) Do(ctx context.Context, opts ...RequestOption
 	res = new(UniversalTransferResp)
 	err = json.Unmarshal(data, res)
 	if err != nil {
+		err = errors.Join(err, fmt.Errorf("unmarshal universal transfer response failed, payload: %s", string(data)))
+
 		return nil, err
 	}
 	return res, nil
