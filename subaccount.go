@@ -1315,7 +1315,7 @@ type SubAccountTransferHistoryResp struct {
 
 // Universal Transfer (For Master Account)
 const (
-	universalTransferEndpoint = "/sapi/v1/asset/universalTransfer"
+	universalTransferEndpoint = "/sapi/v1/sub-account/universalTransfer"
 )
 
 type UniversalTransferService struct {
