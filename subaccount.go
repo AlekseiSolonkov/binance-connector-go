@@ -1403,8 +1403,7 @@ func (s *UniversalTransferService) Do(ctx context.Context, opts ...RequestOption
 }
 
 type UniversalTransferResp struct {
-	TranId       int    `json:"tranId"`
-	ClientTranId string `json:"clientTranId"`
+	TranId int `json:"tranId,omitempty"`
 }
 
 // Query Universal Transfer History (For Master Account)
