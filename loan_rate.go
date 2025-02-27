@@ -46,7 +46,7 @@ func (s *FlexibleLoanRateHistoryService) Current(current int64) *FlexibleLoanRat
 }
 
 type RateHistoryRecord struct {
-	Total int64                        `json:"total"`
+	Total string                       `json:"total"`
 	Rows  []FlexibleLoanRateHistoryRow `json:"rows,omitempty"`
 }
 
