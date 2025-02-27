@@ -340,8 +340,8 @@ func (c *Client) NewMarginAccountNewOrderService() *MarginAccountNewOrderService
 	return &MarginAccountNewOrderService{c: c}
 }
 
-func (c *Client) NewSimpleEarnFlexibleRateHistoryService() *SimpleEarnFlexibleRateHistoryService {
-	return &SimpleEarnFlexibleRateHistoryService{c: c}
+func (c *Client) NewSimpleEarnFlexibleRateHistoryService() *FlexibleLoanRateHistoryService {
+	return &FlexibleLoanRateHistoryService{c: c}
 }
 
 func (c *Client) NewMarginAccountCancelOrderService() *MarginAccountCancelOrderService {

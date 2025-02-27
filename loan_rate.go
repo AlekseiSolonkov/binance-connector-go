@@ -8,58 +8,70 @@ import (
 
 // Flexible loan rate history API Endpoint
 const (
-	getSimpleEarnFlexibleRateHistoryEndpoint = "/sapi/v1/simple-earn/flexible/history/rateHistory"
+	getFlexibleLoanRateHistoryEndpoint = "/bapi/margin/v1/public/flexibleLoan/isolated/new/loanData/annualInterestRates"
 )
 
-type SimpleEarnFlexibleRateHistoryService struct {
+type FlexibleLoanRateHistoryService struct {
 	c         *Client
-	productId *string
+	coin      *string
+	size      *int64
 	startTime *int64
 	endTime   *int64
 	current   *int64
 }
 
-func (s *SimpleEarnFlexibleRateHistoryService) ProductId(productId string) *SimpleEarnFlexibleRateHistoryService {
-	s.productId = &productId
+func (s *FlexibleLoanRateHistoryService) Coin(coin string) *FlexibleLoanRateHistoryService {
+	s.coin = &coin
 	return s
 }
 
-func (s *SimpleEarnFlexibleRateHistoryService) StartTime(startTime int64) *SimpleEarnFlexibleRateHistoryService {
+func (s *FlexibleLoanRateHistoryService) Size(size int64) *FlexibleLoanRateHistoryService {
+	s.size = &size
+	return s
+}
+
+func (s *FlexibleLoanRateHistoryService) StartTime(startTime int64) *FlexibleLoanRateHistoryService {
 	s.startTime = &startTime
 	return s
 }
 
-func (s *SimpleEarnFlexibleRateHistoryService) EndTime(endTime int64) *SimpleEarnFlexibleRateHistoryService {
+func (s *FlexibleLoanRateHistoryService) EndTime(endTime int64) *FlexibleLoanRateHistoryService {
 	s.endTime = &endTime
 	return s
 }
 
-func (s *SimpleEarnFlexibleRateHistoryService) Current(current int64) *SimpleEarnFlexibleRateHistoryService {
+func (s *FlexibleLoanRateHistoryService) Current(current int64) *FlexibleLoanRateHistoryService {
 	s.current = &current
 	return s
 }
 
-type SimpleEarnFlexibleRateHistoryResponse struct {
-	Total int64                              `json:"total"`
-	Rows  []SimpleEarnFlexibleRateHistoryRow `json:"rows,omitempty"`
+type RateHistoryRecord struct {
+	Total int64                        `json:"total"`
+	Rows  []FlexibleLoanRateHistoryRow `json:"rows,omitempty"`
 }
 
-type SimpleEarnFlexibleRateHistoryRow struct {
-	Asset                string `json:"asset"`
-	AnnualPercentageRate string `json:"annualPercentageRate"`
-	ProductId            string `json:"productId"`
-	Time                 int64  `json:"time"`
+type FlexibleLoanRateHistoryResponse struct {
+	Data RateHistoryRecord `json:"data"`
+}
+
+type FlexibleLoanRateHistoryRow struct {
+	Asset              string `json:"coin"`
+	Time               string `json:"dateTimestamp"`
+	AnnualInterestRate string `json:"annualInterestRate"`
 }
 
 // Do send request
-func (s *SimpleEarnFlexibleRateHistoryService) Do(ctx context.Context, opts ...RequestOption) (res *SimpleEarnFlexibleRateHistoryResponse, err error) {
+func (s *FlexibleLoanRateHistoryService) Do(ctx context.Context, opts ...RequestOption) (res *FlexibleLoanRateHistoryResponse, err error) {
 	r := &request{
 		method:   http.MethodGet,
-		endpoint: getSimpleEarnFlexibleRateHistoryEndpoint,
+		endpoint: getFlexibleLoanRateHistoryEndpoint,
 		secType:  secTypeSigned,
 	}
-	if s.productId != nil {
-		r.setParam("productId", *s.productId)
+	if s.coin != nil {
+		r.setParam("coin", *s.coin)
+	}
+	if s.size != nil {
+		r.setParam("size", *s.size)
 	}
 	if s.startTime != nil {
 		r.setParam("startTime", *s.startTime)
@@ -74,7 +86,7 @@ func (s *SimpleEarnFlexibleRateHistoryService) Do(ctx context.Context, opts ...R
 	if err != nil {
 		return nil, err
 	}
-	res = new(SimpleEarnFlexibleRateHistoryResponse)
+	res = new(FlexibleLoanRateHistoryResponse)
 	err = json.Unmarshal(data, res)
 	if err != nil {
 		return nil, err
