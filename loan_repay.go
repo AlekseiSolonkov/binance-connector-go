@@ -81,7 +81,7 @@ func (s *FlexibleLoanRepayService) Do(ctx context.Context, opts ...RequestOption
 		r.setParam("repayAmount", *s.repayAmount)
 	}
 	if s.repayType != nil {
-		r.setParam("type", *s.repayType)
+		r.setParam("repaymentType", *s.repayType)
 	}
 	if s.fullRepayment != nil {
 		r.setParam("fullRepayment", *s.fullRepayment)
