@@ -19,6 +19,7 @@ type FlexibleLoanRepayService struct {
 	repayAmount      *float64
 	collateralReturn *bool
 	fullRepayment    *bool
+	repayType        *int
 }
 
 // LoanCoin set loanCoin
@@ -34,6 +35,11 @@ func (s *FlexibleLoanRepayService) CollateralCoin(collateralCoin string) *Flexib
 
 func (s *FlexibleLoanRepayService) RepayAmount(repayAmount float64) *FlexibleLoanRepayService {
 	s.repayAmount = &repayAmount
+	return s
+}
+
+func (s *FlexibleLoanRepayService) RepayType(repayType int) *FlexibleLoanRepayService {
+	s.repayType = &repayType
 	return s
 }
 
@@ -73,6 +79,9 @@ func (s *FlexibleLoanRepayService) Do(ctx context.Context, opts ...RequestOption
 	}
 	if s.repayAmount != nil {
 		r.setParam("repayAmount", *s.repayAmount)
+	}
+	if s.repayType != nil {
+		r.setParam("type", *s.repayType)
 	}
 	if s.fullRepayment != nil {
 		r.setParam("fullRepayment", *s.fullRepayment)
